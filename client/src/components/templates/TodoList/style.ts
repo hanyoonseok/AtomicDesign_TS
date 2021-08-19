@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {Label} from "../../../components"
+import {Label,Button} from "../../../components"
 
 export const FlowWrapper = styled.div`
     display:flex;
@@ -19,7 +19,7 @@ export const TodoWrapper = styled.div`
     margin-top:100px;
 `;
 
-export const PlusBtn = styled.button`
+export const PlusBtn = styled(Button)`
     border-radius:50%;
     background-color:green;
     color:white;

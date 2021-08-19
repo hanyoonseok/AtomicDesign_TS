@@ -12,6 +12,7 @@ export interface Props {
   icon?: string;
   /** fit to size enable */
   submit?: boolean;
+  setTodo?:React.Dispatch<React.SetStateAction<string[]>>
 }
 
 function Button ({
@@ -20,6 +21,7 @@ function Button ({
   onClick,
   icon,
   submit,
+  setTodo,
   ...props
 }:Props):React.ReactElement {
   // default

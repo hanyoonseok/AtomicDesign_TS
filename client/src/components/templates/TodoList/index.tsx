@@ -1,9 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import * as S from "./style"
 import {TodoItem, Background} from "../../../components"
 
+interface Props{
+  todo:string[],
+  setTodo:React.Dispatch<React.SetStateAction<string[]>>
+}
+
 const TodoList = ({
-}) => {
+  todo,
+  setTodo
+}:Props):React.ReactElement => {
   return (
     <Background bgColor={"lightgray"}>
       <S.TodoWrapper>
@@ -13,14 +20,16 @@ const TodoList = ({
           <S.StyledLabel>할일 2개 남음</S.StyledLabel>
         </S.FlowWrapper>
         <S.FlowWrapper>
-          <TodoItem/>
-          <TodoItem/>
-          <TodoItem/>
-          <TodoItem/>
-          <TodoItem/>
+          {
+            todo.map((item)=>{
+              return(
+                <TodoItem text={item}/>
+              )
+            })
+          }
         </S.FlowWrapper>
       </S.TodoWrapper>
-      <S.PlusBtn>+</S.PlusBtn>
+      <S.PlusBtn setTodo={setTodo}>+</S.PlusBtn>
     </Background>
     
   );
