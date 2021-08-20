@@ -1,15 +1,26 @@
 import React,{useState} from "react";
 import * as S from "./style"
-import {TodoItem, Background} from "../../../components"
+import {TodoItem, Background, AddForm} from "../../../components"
 
 interface Props{
-  todo:string[],
-  setTodo:React.Dispatch<React.SetStateAction<string[]>>
+  todo:{
+    id: number;
+    text: string;
+}[],
+  AddTodo():void,
+  todonum:number|string,
+  modalOpen:boolean,
+  onChange(e:any):void,
+  OpenModal():void
 }
 
 const TodoList = ({
   todo,
-  setTodo
+  AddTodo,
+  todonum,
+  modalOpen,
+  OpenModal,
+  onChange,
 }:Props):React.ReactElement => {
   return (
     <Background bgColor={"lightgray"}>
@@ -17,19 +28,28 @@ const TodoList = ({
         <S.FlowWrapper>
           <S.StyledLabel ftWeight={"bold"}>2019년 9월 25일</S.StyledLabel>
           <S.StyledLabel>화요일</S.StyledLabel>
-          <S.StyledLabel>할일 2개 남음</S.StyledLabel>
+          <S.StyledLabel children={todonum+'개'}/>
         </S.FlowWrapper>
         <S.FlowWrapper>
           {
             todo.map((item)=>{
               return(
-                <TodoItem text={item}/>
+                <TodoItem text={item.text}/>
               )
             })
           }
         </S.FlowWrapper>
       </S.TodoWrapper>
-      <S.PlusBtn setTodo={setTodo}>+</S.PlusBtn>
+      <S.PlusBtn 
+      onClick={OpenModal}>
+        +
+      </S.PlusBtn>
+      {
+        modalOpen && 
+        <AddForm 
+        AddTodo={AddTodo}
+        onChange={onChange}/>
+      }
     </Background>
     
   );

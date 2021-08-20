@@ -26,7 +26,7 @@ function Button ({
 }:Props):React.ReactElement {
   // default
   return (
-    <S.StyledButton type="button" {...props}>
+    <S.StyledButton type="button" onClick={onClick}{...props}>
       {children}
     </S.StyledButton>
   );
