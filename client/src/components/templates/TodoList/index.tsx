@@ -6,50 +6,46 @@ interface Props{
   todo:{
     id: number;
     text: string;
+    done:boolean;
   }[],
+  checkBtn(id: number):void,
+  deleteBtn(id: number):void,
   AddTodo():void,
-  todonum:number|string,
   inputOpen:boolean,
   onChange(e:any):void,
   ControlInput():void,
-  today:{
+  Today:{
     date: string;
     week: string;
   },
-  isCheck:boolean,
-  setIsCheck:React.Dispatch<React.SetStateAction<boolean>>,
-  checkBtn():void
 }
 
 const TodoList = ({
   todo,
+  checkBtn,
+  deleteBtn,
   AddTodo,
-  todonum,
   inputOpen,
   ControlInput,
   onChange,
-  today,
-  isCheck,
-  setIsCheck,
-  checkBtn,
+  Today,
 }:Props):React.ReactElement => {
   return (
     <Background bgColor={"lightgray"}>
       <S.TodoWrapper>
         <S.FlowWrapper>
-          <S.StyledLabel ftWeight={"bold"} ftSize={"2rem"}>{today.date}</S.StyledLabel>
-          <S.StyledLabel color={"green"} ftWeight={"bold"}>{today.week}</S.StyledLabel>
-          <S.StyledLabel  ftWeight={"bold"}children={todonum+'개'}/>
+          <S.StyledLabel ftWeight={"bold"} ftSize={"2rem"}>{Today.date}</S.StyledLabel>
+          <S.StyledLabel color={"green"} ftWeight={"bold"}>{Today.week}</S.StyledLabel>
+          <S.StyledLabel  ftWeight={"bold"}children={todo.length+'개'}/>
         </S.FlowWrapper>
         <S.FlowWrapper>
           {
             todo.map((item)=>{
               return(
                 <TodoItem 
-                text={item.text}
-                isCheck={isCheck}
-                setIsCheck={setIsCheck}
-                checkBtn={checkBtn}/>
+                checkBtn={checkBtn}
+                deleteBtn={deleteBtn}
+                item={item}/>
               )
             })
           }

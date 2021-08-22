@@ -1,30 +1,38 @@
 import React,{memo} from "react";
 import * as S from "./style"
-import {Button , Label} from "../../../components"
-import {MdDone} from "react-icons/md"
+import { Label} from "../../../components"
+import {MdDone, MdDelete } from "react-icons/md"
 
 interface Props{
-  text?:string,
-  isCheck:boolean,
-  setIsCheck:React.Dispatch<React.SetStateAction<boolean>>,
-  checkBtn():void,
+  checkBtn(id:number):void,
+  deleteBtn(id:number):void,
+  item:{
+    id: number;
+    text: string;
+    done:boolean;
+  }
 }
 function TodoItem ({
-  text,
-  isCheck,
-  setIsCheck,
   checkBtn,
+  deleteBtn,
+  item,
 }:Props):React.ReactElement {
   // default
   return (
-      <S.ItemWrapper>
-        <S.CheckBtn onClick={checkBtn}>
+      <S.ItemWrapper >
+        <S.CheckBtn onClick={() => checkBtn(item.id)}>
           {
-            isCheck ? <MdDone/>
+            item.done ? <MdDone/>
             : 'ㅇ'
           }
         </S.CheckBtn>
-        <Label ftSize={"1.5rem"} children={text}/>
+        {
+          item.done?<S.StyledLabel ftSize={"1.5rem"} color={"lightgray"} children={item.text}/>
+          :<S.StyledLabel ftSize={"1.5rem"} children={item.text}/>
+        }
+        <S.Remove>
+          <MdDelete onClick={() => deleteBtn(item.id)}/>
+        </S.Remove>
       </S.ItemWrapper>
   );
 };
