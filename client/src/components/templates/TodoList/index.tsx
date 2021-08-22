@@ -6,50 +6,66 @@ interface Props{
   todo:{
     id: number;
     text: string;
-}[],
+  }[],
   AddTodo():void,
   todonum:number|string,
-  modalOpen:boolean,
+  inputOpen:boolean,
   onChange(e:any):void,
-  OpenModal():void
+  ControlInput():void,
+  today:{
+    date: string;
+    week: string;
+  },
+  isCheck:boolean,
+  setIsCheck:React.Dispatch<React.SetStateAction<boolean>>,
+  checkBtn():void
 }
 
 const TodoList = ({
   todo,
   AddTodo,
   todonum,
-  modalOpen,
-  OpenModal,
+  inputOpen,
+  ControlInput,
   onChange,
+  today,
+  isCheck,
+  setIsCheck,
+  checkBtn,
 }:Props):React.ReactElement => {
   return (
     <Background bgColor={"lightgray"}>
       <S.TodoWrapper>
         <S.FlowWrapper>
-          <S.StyledLabel ftWeight={"bold"}>2019년 9월 25일</S.StyledLabel>
-          <S.StyledLabel>화요일</S.StyledLabel>
-          <S.StyledLabel children={todonum+'개'}/>
+          <S.StyledLabel ftWeight={"bold"} ftSize={"2rem"}>{today.date}</S.StyledLabel>
+          <S.StyledLabel color={"green"} ftWeight={"bold"}>{today.week}</S.StyledLabel>
+          <S.StyledLabel  ftWeight={"bold"}children={todonum+'개'}/>
         </S.FlowWrapper>
         <S.FlowWrapper>
           {
             todo.map((item)=>{
               return(
-                <TodoItem text={item.text}/>
+                <TodoItem 
+                text={item.text}
+                isCheck={isCheck}
+                setIsCheck={setIsCheck}
+                checkBtn={checkBtn}/>
               )
             })
           }
         </S.FlowWrapper>
-      </S.TodoWrapper>
-      <S.PlusBtn 
-      onClick={OpenModal}>
-        +
-      </S.PlusBtn>
-      {
-        modalOpen && 
+        {
+        inputOpen && 
         <AddForm 
         AddTodo={AddTodo}
         onChange={onChange}/>
-      }
+        }
+        <S.PlusBtn 
+        onClick={ControlInput}
+        inputOpen={inputOpen}>
+          +
+        </S.PlusBtn>
+      </S.TodoWrapper>
     </Background>
     
   );

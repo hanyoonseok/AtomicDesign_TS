@@ -1,4 +1,4 @@
-import React from "react";
+import React,{memo} from "react";
 import * as S from "./style"
 
 interface Props{
@@ -11,12 +11,13 @@ function AddForm ({
 }:Props):React.ReactElement {
   // default
   return (
-      <S.FormWrapper>
-          <S.StyledLabel>할 일을 추가하세요</S.StyledLabel>
-          <S.StyledInput onChange={onChange}/>
-          <S.PlusBtn onClick={AddTodo}>+</S.PlusBtn>
+      <S.FormWrapper onSubmit={AddTodo}>
+          <S.StyledInput 
+          autoFocus
+          placeholder="할 일을 추가하고 Enter를 누르세요" 
+          onChange={onChange}/>
       </S.FormWrapper>
   );
 };
 
-export default AddForm;
+export default React.memo(AddForm);

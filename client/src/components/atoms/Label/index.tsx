@@ -4,8 +4,9 @@ import * as S from "./style";
 export interface Props {
   /** 버튼 내용 또는 엘리먼트 */
   children?: React.ReactElement | string | number;
-  ftSize?:number;
+  ftSize?:string;
   ftWeight?:string;
+  color?:string;
 }
 
 function Label ({
@@ -16,7 +17,7 @@ function Label ({
 }:Props):React.ReactElement {
   // default
   return (
-    <S.StyledLabel {...props}>{children}</S.StyledLabel>
+    <S.StyledLabel ftSize={ftSize} ftWeight={ftWeight} {...props}>{children}</S.StyledLabel>
   );
 };
 

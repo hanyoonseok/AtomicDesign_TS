@@ -10,8 +10,22 @@ const TodoListPage = () => {
   ]);
   const [add, setAdd] = useState(''); //onchange
   const [todonum, setTodonum]=useState(0);
-  const [modalOpen, setModalOpen]=useState(false)
+  const [inputOpen, setInputOpen]=useState(false);
+  const [isCheck, setIsCheck] = useState(false);
+  const [today, setToday]=useState({
+    date:'',
+    week:'',
+  });
+  const week = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
+  useEffect(()=>{
+    const now = new Date();
+    const Today = {
+      date:now.getFullYear()+'년 '+(now.getMonth()+1)+'월 '+now.getDate()+'일 ',
+      week:week[now.getDay()]
+    }
+    setToday(Today);
+  })
   useEffect(()=>{
     setTodonum(todo.length);
   },[todo])
@@ -25,11 +39,15 @@ const TodoListPage = () => {
     setTodo(todo.concat(adding));
     setAdd('');
     nextId.current+=1;
-    setModalOpen(!modalOpen);
+    setInputOpen(!inputOpen);
   }
 
-  function OpenModal():void{
-    setModalOpen(true);
+  function ControlInput():void{
+    setInputOpen(!inputOpen);
+  }
+
+  function checkBtn():void {
+    setIsCheck(!isCheck);
   }
 
   const onChange = (e:any) =>{
@@ -41,9 +59,13 @@ const TodoListPage = () => {
       todo={todo}
       AddTodo={AddTodo}
       todonum={todonum}
-      modalOpen={modalOpen}
-      OpenModal={OpenModal}
+      inputOpen={inputOpen}
+      ControlInput={ControlInput}
       onChange={onChange}
+      today={today}
+      isCheck={isCheck}
+      setIsCheck={setIsCheck}
+      checkBtn={checkBtn}
     />
   );
 };
