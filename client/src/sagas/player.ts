@@ -43,6 +43,7 @@ function* deletePlayer(action: PlayerAction): Generator {
   try {
     yield put({
       type: DELETE_PLAYER_SUCCESS,
+      data:action.data
     });
   } catch (err) {
     yield put({

@@ -25,11 +25,11 @@ export const loadPlayer = (data?: any) => ({
   type: LOAD_PLAYER,
   data,
 });
-export const deletePlayer = (data?: any) => ({
+export const deletePlayer = (data?: string) => ({
   type: DELETE_PLAYER,
   data,
 });
-export const addPlayer = (data: string) => ({
+export const addPlayer = (data: PlayerType) => ({
   type: ADD_PLAYER,
   data,
 });
@@ -51,18 +51,14 @@ const player = (state = initialState, action: PlayerAction) => {
       case ADD_PLAYER:
         break;
       case ADD_PLAYER_SUCCESS:
-        const dummy = {
-          nickname: action.data,
-          age: 20,
-          id: 1,
-        };
-        draft.players.unshift(dummy);
+        draft.players.unshift(action.data);
         break;
       case ADD_PLAYER_ERROR:
         break;
       case DELETE_PLAYER:
         break;
       case DELETE_PLAYER_SUCCESS:
+        draft.players = draft.players.filter((v)=>v.id !== action.data)
         break;
       case DELETE_PLAYER_ERROR:
         break;

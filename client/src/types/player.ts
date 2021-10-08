@@ -1,6 +1,6 @@
 
 export interface PlayerType{
     nickname?:string,
-    age?:number,
-    id?:number
+    age?:string,
+    id?:string
 }

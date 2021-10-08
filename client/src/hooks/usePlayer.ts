@@ -8,12 +8,17 @@ export default function useScore() {
   const dispatch = useDispatch();
   
   const onLoadPlayer = useCallback(() => dispatch(loadPlayer()), [dispatch]);
-  const onAddPlayer = useCallback((nickname) => () => {
-      dispatch(addPlayer(nickname));
+  const onAddPlayer = useCallback((nickname, age, id) => () => {
+      const data={
+          nickname,
+          age,
+          id
+      }
+      dispatch(addPlayer(data));
     },
     [dispatch]
   );
-  const onDeletePlayer = useCallback(() => dispatch(deletePlayer()), [dispatch]);
+  const onDeletePlayer = useCallback((deleteId) => () => dispatch(deletePlayer(deleteId)), [dispatch]);
 
   return { players, onLoadPlayer, onAddPlayer, onDeletePlayer };
 }
