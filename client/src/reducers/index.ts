@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import playerReducer from './player';
-import scoreReducer from './score';
+import player from './player';
+import score from './score';
 
 const rootReducer = combineReducers({
-  playerReducer,
-  scoreReducer,
+  player,
+  score,
 });
 export default rootReducer;
 export type RootState = ReturnType<typeof rootReducer>;

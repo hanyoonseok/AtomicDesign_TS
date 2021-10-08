@@ -4,7 +4,7 @@ import { scoreDown, scoreUp } from "../reducers/score";
 import { useCallback } from "react";
 
 export default function useScore(){
-    const {score} = useSelector((state:RootState)=>state.scoreReducer);
+    const {score} = useSelector((state:RootState)=>state.score);
     const dispatch = useDispatch();
 
     const onScoreUp = useCallback(()=> dispatch(scoreUp(1)), [dispatch]);

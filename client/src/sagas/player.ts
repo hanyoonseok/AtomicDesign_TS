@@ -29,6 +29,7 @@ function* addPlayer(action: PlayerAction): Generator {
   try {
     yield put({
       type: ADD_PLAYER_SUCCESS,
+      data:action.data
     });
   } catch (err) {
     yield put({

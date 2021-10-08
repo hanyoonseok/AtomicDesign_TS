@@ -10,38 +10,36 @@ import {
   DELETE_PLAYER_ERROR,
 } from '../actions/constants';
 import produce from 'immer';
+import {ActionType} from 'typesafe-actions'
+
 import { PlayerType } from '../types/player';
 
-interface StateProps{
-    players:PlayerType[]
+export interface StateProps {
+  players: PlayerType[];
 }
-export const initialState:StateProps = {
-  players:[],
+export const initialState: StateProps = {
+  players: [],
 };
 
-export const loadPlayer = () => {
-  return {
-    type: LOAD_PLAYER,
-  };
-};
-
-export const addPlayer = () => {
-  return {
-    type: ADD_PLAYER,
-  };
-};
-export const deletePlayer = () => {
-  return {
-    type: DELETE_PLAYER,
-  };
-};
+export const loadPlayer = (data?: any) => ({
+  type: LOAD_PLAYER,
+  data,
+});
+export const deletePlayer = (data?: any) => ({
+  type: DELETE_PLAYER,
+  data,
+});
+export const addPlayer = (data: string) => ({
+  type: ADD_PLAYER,
+  data,
+});
 
 export type PlayerAction =
   | ReturnType<typeof loadPlayer>
-  | ReturnType<typeof addPlayer>
-  | ReturnType<typeof deletePlayer>;
+  | ReturnType<typeof deletePlayer>
+  | ReturnType<typeof addPlayer>;
 
-const playerReducer = (state = initialState, action: PlayerAction) => {
+const player = (state = initialState, action: PlayerAction) => {
   return produce(state, (draft) => {
     switch (action.type) {
       case LOAD_PLAYER:
@@ -52,12 +50,13 @@ const playerReducer = (state = initialState, action: PlayerAction) => {
         break;
       case ADD_PLAYER:
         break;
-      case ADD_PLAYER_SUCCESS:console.log('d');
-        const dummy={
-            nickname:"nick",
-            age:20,
-        }
-          draft.players.unshift(dummy);
+      case ADD_PLAYER_SUCCESS:
+        const dummy = {
+          nickname: action.data,
+          age: 20,
+          id: 1,
+        };
+        draft.players.unshift(dummy);
         break;
       case ADD_PLAYER_ERROR:
         break;
@@ -72,5 +71,5 @@ const playerReducer = (state = initialState, action: PlayerAction) => {
     }
   });
 };
-export type PlayerRootState = ReturnType<typeof playerReducer>;
-export default playerReducer;
+export type PlayerRootState = ReturnType<typeof player>;
+export default player;

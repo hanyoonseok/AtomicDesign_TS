@@ -33,7 +33,7 @@ export type ScoreAction =
 | ReturnType<typeof scoreUp> 
 | ReturnType<typeof scoreDown>;
 
-const scoreReducer = (state:ScoreState = initialState, action: ScoreAction) => {
+const score = (state:ScoreState = initialState, action: ScoreAction) => {
   return produce(state, (draft) => {
     switch (action.type) {
       case SCORE_UP:
@@ -56,5 +56,5 @@ const scoreReducer = (state:ScoreState = initialState, action: ScoreAction) => {
   });
 };
 
-export type ScoreRootState = ReturnType<typeof scoreReducer>;
-export default scoreReducer;
+export type ScoreRootState = ReturnType<typeof score>;
+export default score;
