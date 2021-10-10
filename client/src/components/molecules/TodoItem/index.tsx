@@ -2,36 +2,29 @@ import React,{memo} from "react";
 import * as S from "./style"
 import { Label} from "../../../components"
 import {MdDone, MdDelete } from "react-icons/md"
+import {ITodo} from '../../../types/todo'
 
 interface Props{
-  checkBtn(id:number):void,
-  deleteBtn(id:number):void,
-  item:{
-    id: number;
-    text: string;
-    done:boolean;
-  }
+  item:ITodo
 }
 function TodoItem ({
-  checkBtn,
-  deleteBtn,
   item,
 }:Props):React.ReactElement {
   // default
   return (
       <S.ItemWrapper >
-        <S.CheckBtn onClick={() => checkBtn(item.id)}>
+        <S.CheckBtn>
           {
-            item.done ? <MdDone/>
+            item.isDone ? <MdDone/>
             : 'ㅇ'
           }
         </S.CheckBtn>
         {
-          item.done?<S.StyledLabel ftSize={"1.5rem"} color={"lightgray"} children={item.text}/>
+          item.isDone?<S.StyledLabel ftSize={"1.5rem"} color={"lightgray"} children={item.text}/>
           :<S.StyledLabel ftSize={"1.5rem"} children={item.text}/>
         }
         <S.Remove>
-          <MdDelete onClick={() => deleteBtn(item.id)}/>
+          <MdDelete/>
         </S.Remove>
       </S.ItemWrapper>
   );
