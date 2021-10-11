@@ -7,15 +7,17 @@ export default function useScore() {
   const { todolist, inputOpen } = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
 
-  const onAddTodo = useCallback((text) => () => {
+  const onAddTodo = useCallback(
+    (text) => () => {
       dispatch(addTodo(text));
     },
     [dispatch]
   );
   const onDeleteTodo = useCallback((deleteId) => () => dispatch(deleteTodo(deleteId)), [dispatch]);
+  const onCheckTodo = useCallback((checkId) => () => dispatch(checkTodo(checkId)), [dispatch]);
   const onControlInput = useCallback(() => {
-        dispatch(controlInput());
-  },[dispatch]);
+    dispatch(controlInput());
+  }, [dispatch]);
 
-  return { todolist, onAddTodo, onDeleteTodo, onControlInput };
+  return { todolist, inputOpen, onAddTodo, onDeleteTodo, onCheckTodo,onControlInput };
 }

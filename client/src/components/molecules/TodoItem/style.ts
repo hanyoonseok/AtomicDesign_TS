@@ -21,6 +21,7 @@ export const ItemWrapper = styled.div`
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
+  cursor:pointer;
   &:hover {
     ${Remove} {
       display: initial;

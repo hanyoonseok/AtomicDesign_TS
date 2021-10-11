@@ -11,6 +11,7 @@ import {
   CONTROL_INPUT,
 } from '../actions/constants';
 import produce from 'immer';
+import {nanoid} from 'nanoid'
 
 import { ITodoList } from '../types/todo';
 
@@ -55,12 +56,15 @@ const todo = (state = initialState, action: TodoAction) => {
       case ADD_TODO:
         break;
       case ADD_TODO_SUCCESS:
+        const random = nanoid(10);
         const dummy = {
-          id: draft.todolist.todoNum,
+          id: random,
           text: action.data,
           isDone: false,
         };
         draft.todolist.todos.unshift(dummy);
+        draft.todolist.todoNum = draft.todolist.todoNum+1;
+        draft.inputOpen=false;
         break;
       case ADD_TODO_ERROR:
         break;
@@ -68,13 +72,15 @@ const todo = (state = initialState, action: TodoAction) => {
         break;
       case DELETE_TODO_SUCCESS:
         draft.todolist.todos = draft.todolist.todos.filter((v) => v.id !== action.data);
+        draft.todolist.todoNum = draft.todolist.todoNum-1;
+        draft.inputOpen=false;
         break;
       case DELETE_TODO_ERROR:
         break;
       case CHECK_TODO:
         break;
       case CHECK_TODO_SUCCESS:
-        draft.todolist.todos = draft.todolist.todos.filter((v) => v.id !== action.data);
+        draft.todolist.todos.filter((v) => v.id === action.data ? v.isDone=!v.isDone : '');
         break;
       case CHECK_TODO_ERROR:
         break;

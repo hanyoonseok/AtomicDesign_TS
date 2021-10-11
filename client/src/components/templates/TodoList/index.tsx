@@ -32,14 +32,16 @@ const TodoList = ({ Today, ControlInput }: Props): React.ReactElement => {
           <S.StyledLabel color={'green'} ftWeight={'bold'}>
             {Today.week}
           </S.StyledLabel>
-          <S.StyledLabel ftWeight={'bold'} children={todolist.todoNum + '개'} />
+          <S.StyledLabel ftWeight={'bold'} children={todolist.todos.length + '개'} />
         </S.FlowWrapper>
         <S.FlowWrapper>
-          {todolist.todos.map((item, i) => {
+          {
+          todolist.todos && 
+          todolist.todos.map((item, i) => {
             return <TodoItem item={item} key={i} />;
           })}
         </S.FlowWrapper>
-        {inputOpen && <AddForm add={add} onChange={onChange} />}
+        {inputOpen && <AddForm add={add} setAdd={setAdd} onChange={onChange} />}
         <S.PlusBtn onClick={ControlInput} inputOpen={inputOpen}>
           +
         </S.PlusBtn>

@@ -1,7 +1,7 @@
 export interface ITodo{
     isDone?:boolean,
     text?:string,
-    id?:number
+    id?:string
 }
 export interface ITodoList{
     todos:ITodo[];
