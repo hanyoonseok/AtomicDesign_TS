@@ -31,4 +31,4 @@ function AddForm({ onChange, add,setAdd }: Props): React.ReactElement {
   );
 }
 
-export default AddForm
+export default AddForm 
