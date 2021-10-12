@@ -1,29 +1,29 @@
 import React, { useCallback, useState } from 'react';
 import useScore from '../../hooks/useScore';
 import usePlayer from '../../hooks/usePlayer';
-import useInput from '../../hooks/useInput'
-import { PlayerType } from '../../types/player';
+import useInput from '../../hooks/useInput';
+import { IPlayer } from '../../types/player';
 
 const LandingPage: React.FC = () => {
-  const [nickname,setNickname] = useState('');
+  const [nickname, setNickname] = useState('');
   const [age, setAge] = useState('');
   const [id, setId] = useState('');
   const [deleteId, setDeleteId] = useState('');
   const { score, onScoreDown, onScoreUp } = useScore();
   const { players, onAddPlayer, onDeletePlayer } = usePlayer();
 
-  const onChangeNickname = useCallback((e)=>{
+  const onChangeNickname = useCallback((e) => {
     setNickname(e.target.value);
-  },[])
-  const onChangeAge = useCallback((e)=>{
+  }, []);
+  const onChangeAge = useCallback((e) => {
     setAge(e.target.value);
-  },[])
-  const onChangeId = useCallback((e)=>{
+  }, []);
+  const onChangeId = useCallback((e) => {
     setId(e.target.value);
-  },[])
-  const onChangeDeleteId = useCallback((e)=>{
+  }, []);
+  const onChangeDeleteId = useCallback((e) => {
     setDeleteId(e.target.value);
-  },[])
+  }, []);
   return (
     <>
       <div>{score}</div>
@@ -38,7 +38,11 @@ const LandingPage: React.FC = () => {
       <button onClick={onDeletePlayer(deleteId)}>delete last player</button>
       {players &&
         players.map((v) => {
-          return <div>{v.nickname} {v.age} {v.id}</div>;
+          return (
+            <div>
+              {v.nickname} {v.age} {v.id}
+            </div>
+          );
         })}
     </>
   );

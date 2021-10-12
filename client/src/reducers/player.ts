@@ -12,10 +12,10 @@ import {
 import produce from 'immer';
 import {ActionType} from 'typesafe-actions'
 
-import { PlayerType } from '../types/player';
+import { IPlayer } from '../types/player';
 
 export interface StateProps {
-  players: PlayerType[];
+  players: IPlayer[];
 }
 export const initialState: StateProps = {
   players: [],
@@ -29,7 +29,7 @@ export const deletePlayer = (data?: string) => ({
   type: DELETE_PLAYER,
   data,
 });
-export const addPlayer = (data: PlayerType) => ({
+export const addPlayer = (data: IPlayer) => ({
   type: ADD_PLAYER,
   data,
 });

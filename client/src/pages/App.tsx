@@ -5,10 +5,12 @@ import {
   Switch,
 } from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
+
 import theme from "../common/style/theme/default";
 import GlobalStyles from "../common/GlobalStyles";
 import TodoListPage from "./TodoListPage"
 import LandingPage from "./LandingPage"
+import ChatPage from "./ChatPage"
 
 const App:React.FC = () => {
   return (
@@ -25,6 +27,11 @@ const App:React.FC = () => {
             exact
             path="/todo"
             component={TodoListPage}   
+          />
+          <Route
+            exact
+            path="/chat"
+            component={ChatPage}   
           />
         </Switch>
       </Router>

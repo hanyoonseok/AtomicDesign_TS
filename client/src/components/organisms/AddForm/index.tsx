@@ -10,7 +10,6 @@ interface Props {
   setAdd:React.Dispatch<React.SetStateAction<string>>
 }
 function AddForm({ onChange, add,setAdd }: Props): React.ReactElement {
-  const { onAddTodo } = useTodo();
   const dispatch = useDispatch();
 
   const onClick = useCallback((add) => () => {
