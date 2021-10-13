@@ -2,20 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import io from 'socket.io-client';
 import TextField from '@material-ui/core/TextField';
-import { setConstantValue } from 'typescript';
 
 const socket = io('http://localhost:5000');
 
 const ChatPage: React.FC = () => {
-  const [state, setState] = useState({ message: '', name: '' });
+  const [state, setState] = useState({ roomnum:0,message: '', name: '' });
   const [chat, setChat] = useState([{name:'', message:''}]);
 
   useEffect(() => {
-    socket.on('message', ({ name, message }) => {
-      setChat([...chat, {name, message}]);
+    socket.on('receive message', ({ name, message }) => { //서버로부터 메시지 받음
+      setChat([...chat, { name, message}]);
     });
   });
-
   const onTextChange = (e: any) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -32,15 +30,28 @@ const ChatPage: React.FC = () => {
 
   const onMessageSubmit = (e: any) => {
     e.preventDefault();
-    const { name, message } = state;
-    socket.emit('message', { name, message });
-    setState({ message: '', name });
+    const { roomnum, name, message } = state;
+    socket.emit('message', { roomnum, name, message }); //서버로 보낼 이벤트 명, 데이터
+    setState({ ...state, message:'' });
   };
+
+  const joinroom = ()=>{
+    socket.emit('joinRoom', state.roomnum, state.name);
+  }
 
   return (
     <div className="card">
       <form onSubmit={onMessageSubmit}>
         <h1>Messanger</h1>
+        <div className="name-field">
+          <TextField
+            name="roomnum"
+            onChange={(e) => onTextChange(e)}
+            value={state.roomnum}
+            label="Room number"
+          />
+        </div>
+        <button onClick={joinroom}>입장</button>
         <div className="name-field">
           <TextField
             name="name"
