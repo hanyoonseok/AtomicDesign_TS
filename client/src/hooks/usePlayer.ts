@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../reducers';
 import { loadPlayer, addPlayer, deletePlayer } from '../reducers/player';
 import { useCallback } from 'react';
+import { ADD_PLAYER } from '../actions/constants';
 
 export default function useScore() {
   const { players } = useSelector((state: RootState) => state.player);
