@@ -1,6 +1,10 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const server = require('http').createServer(app);
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config();
+const db = require('./models')
 const io = require('socket.io')(server, {
   cors: {
     origin: '*',
@@ -8,11 +12,13 @@ const io = require('socket.io')(server, {
   },
 });
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
+
 let room = ['room1', 'room2', 'room3'];
 let a=0;
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {
-    console.log('disconnecteed');
   });
   socket.on('message', ({ roomnum, name, message }) => {
     //io.emit('message', { name, message }); //나 자신을 포함한 모두에게 전달
@@ -30,6 +36,12 @@ io.on('connection', (socket) => {
     })
   })
 });
+
+db.sequelize.sync()
+.then(()=>{
+  console.log('db접속 성공')
+})
+.catch(console.log('db접속 실패'));
 
 server.listen(5000, function () {
   console.log('listening on port 5000');
