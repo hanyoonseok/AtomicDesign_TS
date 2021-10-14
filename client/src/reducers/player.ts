@@ -10,15 +10,16 @@ import {
   DELETE_PLAYER_ERROR,
 } from '../actions/constants';
 import produce from 'immer';
-import {ActionType} from 'typesafe-actions'
 
 import { IPlayer } from '../types/player';
 
 export interface StateProps {
   players: IPlayer[];
+  player:IPlayer|null;
 }
 export const initialState: StateProps = {
   players: [],
+  player:null,
 };
 
 export const loadPlayer = (data?: any) => ({
@@ -51,6 +52,7 @@ const player = (state = initialState, action: PlayerAction) => {
       case ADD_PLAYER:
         break;
       case ADD_PLAYER_SUCCESS:
+        draft.player = action.data;
         draft.players.unshift(action.data);
         break;
       case ADD_PLAYER_ERROR:

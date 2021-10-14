@@ -1,4 +1,5 @@
-import { takeLatest, put, fork, all } from 'redux-saga/effects';
+import axios from 'axios';
+import { takeLatest, put, fork, all, call } from 'redux-saga/effects';
 import {
   LOAD_PLAYER,
   LOAD_PLAYER_ERROR,
@@ -12,6 +13,9 @@ import {
 } from '../actions/constants';
 import { PlayerAction } from '../reducers/player';
 
+function loadPlayerAPI(){
+
+}
 function* loadPlayer(action: PlayerAction): Generator {
   try {
     yield put({
@@ -25,11 +29,15 @@ function* loadPlayer(action: PlayerAction): Generator {
   }
 }
 
+function addPlayerAPI(data:PlayerAction){
+  return axios.post(`/user/add`, data);
+}
 function* addPlayer(action: PlayerAction): Generator {
+  const result = action.data;//yield call(addPlayerAPI, action.data);
   try {
     yield put({
       type: ADD_PLAYER_SUCCESS,
-      data:action.data
+      data:result
     });
   } catch (err) {
     yield put({
@@ -53,6 +61,7 @@ function* deletePlayer(action: PlayerAction): Generator {
   }
 }
 
+//액션 감지 함수
 function* watchLoadPlayer() {
   yield takeLatest(LOAD_PLAYER, loadPlayer);
 }
