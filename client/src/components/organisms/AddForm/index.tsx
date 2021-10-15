@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../../../reducers/todo';
+import { addTodo } from '../../../modules/todo';
 import * as S from './style';
 
 import useTodo from '../../../hooks/useTodo';

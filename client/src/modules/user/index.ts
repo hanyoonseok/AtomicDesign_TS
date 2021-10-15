@@ -8,10 +8,10 @@ import {
   SIGNUP_USER,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_ERROR,
-} from '../actions/constants';
+} from '../../constants';
 import produce from 'immer';
 
-import { IUser } from '../types/user';
+import { IUser } from '../../types/user';
 
 export interface StateProps {
   signupLoading: boolean;

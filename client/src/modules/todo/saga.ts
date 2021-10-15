@@ -9,8 +9,11 @@ import {
   CHECK_TODO,
   CHECK_TODO_ERROR,
   CHECK_TODO_SUCCESS,
-} from '../actions/constants';
-import { TodoAction } from '../reducers/todo';
+  EDIT_TODO,
+  EDIT_TODO_ERROR,
+  EDIT_TODO_SUCCESS,
+} from '../../constants';
+import { TodoAction } from './index';
 
 function* addTodo(action: TodoAction): Generator {
   try {
@@ -56,6 +59,21 @@ function* checkTodo(action: TodoAction): Generator {
   }
 }
 
+function* editTodo(action: TodoAction): Generator {
+  const result = action.data;
+  try {
+    yield put({
+      type: EDIT_TODO_SUCCESS,
+      data: result,
+    });
+  } catch (err) {
+    yield put({
+      type: EDIT_TODO_ERROR,
+      error: 'edit todo error',
+    });
+  }
+}
+
 function* watchAddTodo() {
   yield takeLatest(ADD_TODO, addTodo);
 }
@@ -65,7 +83,10 @@ function* watchDeleteTodo() {
 function* watchCheckTodo() {
   yield takeLatest(CHECK_TODO, checkTodo);
 }
+function* watchEditTodo() {
+  yield takeLatest(EDIT_TODO, editTodo);
+}
 
-export default function* playerSaga() {
-  yield all([fork(watchAddTodo), fork(watchDeleteTodo), fork(watchCheckTodo)]);
+export default function* todoSaga() {
+  yield all([fork(watchAddTodo), fork(watchDeleteTodo), fork(watchCheckTodo), fork(watchEditTodo)]);
 }

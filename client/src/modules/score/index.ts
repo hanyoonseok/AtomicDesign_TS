@@ -5,13 +5,13 @@ import {
   SCORE_DOWN_SUCCESS,
   SCORE_UP_ERROR,
   SCORE_DOWN_ERROR,
-} from '../actions/constants';
+} from '../../constants';
 import produce from 'immer';
 
-type ScoreState={
+export interface StateProps{
   score:number;
 }
-export const initialState:ScoreState = {
+export const initialState:StateProps = {
   score: 0,
 };
 
@@ -33,12 +33,12 @@ export type ScoreAction =
 | ReturnType<typeof scoreUp> 
 | ReturnType<typeof scoreDown>;
 
-const score = (state:ScoreState = initialState, action: ScoreAction) => {
+const score = (state= initialState, action: ScoreAction) => {
   return produce(state, (draft) => {
     switch (action.type) {
       case SCORE_UP:
         break;
-      case SCORE_UP_SUCCESS:console.log('score up')
+      case SCORE_UP_SUCCESS:
         draft.score += action.data;
         break;
       case SCORE_UP_ERROR:

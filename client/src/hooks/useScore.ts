@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
-import {RootState} from '../reducers';
-import { scoreDown, scoreUp } from "../reducers/score";
-import { SCORE_UP } from "../actions/constants";
+import {RootState} from '../modules';
+import { scoreDown, scoreUp } from "../modules/score";
+import { SCORE_UP } from "../constants";
 import { useCallback } from "react";
 
 export default function useScore(){

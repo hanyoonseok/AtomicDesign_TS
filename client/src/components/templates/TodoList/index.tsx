@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import * as S from './style';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../reducers';
+import { RootState } from '../../../modules';
 
 import { TodoItem, Background, AddForm } from '../../../components';
 import useTodo from '../../../hooks/useTodo'

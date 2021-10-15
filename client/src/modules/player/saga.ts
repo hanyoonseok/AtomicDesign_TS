@@ -10,8 +10,8 @@ import {
   DELETE_PLAYER,
   DELETE_PLAYER_ERROR,
   DELETE_PLAYER_SUCCESS,
-} from '../actions/constants';
-import { PlayerAction } from '../reducers/player';
+} from '../../constants';
+import { PlayerAction } from './index';
 
 function loadPlayerAPI(){
 

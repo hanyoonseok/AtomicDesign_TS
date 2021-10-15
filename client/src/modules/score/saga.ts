@@ -6,8 +6,8 @@ import {
   SCORE_UP,
   SCORE_UP_ERROR,
   SCORE_UP_SUCCESS,
-} from '../actions/constants';
-import { ScoreAction } from '../reducers/score';
+} from '../../constants';
+import { ScoreAction } from './index';
 
 function* scoreUp(action: ScoreAction) {
   try {

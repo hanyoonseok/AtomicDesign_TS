@@ -8,10 +8,10 @@ import {
   DELETE_PLAYER,
   DELETE_PLAYER_SUCCESS,
   DELETE_PLAYER_ERROR,
-} from '../actions/constants';
+} from '../../constants';
 import produce from 'immer';
 
-import { IPlayer } from '../types/player';
+import { IPlayer } from '../../types/player';
 
 export interface StateProps {
   players: IPlayer[];

@@ -10,8 +10,8 @@ import {
   LOGOUT_USER,
   LOGOUT_USER_ERROR,
   LOGOUT_USER_SUCCESS,
-} from '../actions/constants';
-import { UserAction } from '../reducers/user';
+} from '../../constants';
+import { UserAction } from './index';
 
 function signupUserAPI(data:UserAction){
     return axios.post('/user/signup', data);
