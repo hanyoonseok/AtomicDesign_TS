@@ -20,7 +20,12 @@ a{
     color: inherit;
     text-decoration: none;
 }
-  
+li{
+    list-style:none;
+}
+ul{
+    display:flex;
+}
 
 `;
 export default GlobalStyles;

@@ -1,5 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
+import * as S from './style';
+import { AiFillGithub } from 'react-icons/ai';
 
 import { RootState } from '../../modules';
 import { loginUser } from '../../modules/user';
@@ -8,41 +12,41 @@ import useInput from '../../hooks/useInput';
 const LoginPage = () => {
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
-  const [nickname, onChangeNickname] = useInput('');
   const dispatch = useDispatch();
+  const history = useHistory();
   const me = useSelector((state: RootState) => state.user?.me);
 
   const onSubmitLogin = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      dispatch(loginUser({ email, password, nickname }));
+      dispatch(loginUser({ email, password }));
     },
-    [email, password, nickname]
+    [email, password]
   );
 
+  useEffect(() => {
+    if (me) {
+      history.push('/github');
+    }
+  }, [me]);
+
   return (
-    <>
-      {!me ? (
-        <>
-          <h1>로그인하세요</h1>
-          <form>
-            <h1>Login Page</h1>
-            <h3>email</h3>
-            <input type="email" value={email} onChange={onChangeEmail} />
-            <h3>password</h3>
-            <input type="password" value={password} onChange={onChangePassword} />
-            <h3>nickname</h3>
-            <input type="text" value={nickname} onChange={onChangeNickname} /> <br />
-            <button onClick={onSubmitLogin}>Login</button>
-          </form>
-        </>
-      ) : (
-        <>
-          <h1>로그인 되었습니다.</h1>
-          <h3>{me?.nickname}님 안녕하세요</h3>
-        </>
-      )}
-    </>
+    <S.Wrapper>
+      <S.LoginForm>
+        <AiFillGithub fontSize="50px" style={{ marginBottom: '32px' }} />
+        <h3>Sign in to Github</h3>
+        <S.StyledForm>
+          <h3>username or email address</h3>
+          <S.StyledInput type="email" value={email} onChange={onChangeEmail} />
+          <h3>password</h3>
+          <S.StyledInput type="password" value={password} onChange={onChangePassword} />
+          <S.StyledButton onClick={onSubmitLogin}>Sign in</S.StyledButton>
+        </S.StyledForm>
+        <S.StyledForm>
+          New to Github? <Link to="/signup" color="blue">create a new account</Link>
+        </S.StyledForm>
+      </S.LoginForm>
+    </S.Wrapper>
   );
 };
 

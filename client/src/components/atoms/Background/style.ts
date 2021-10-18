@@ -15,5 +15,4 @@ export const StyledBackground = styled.div<Props>`
     width: 100%;
     height: 100%; // 혹시 모르니 해둠
     box-sizing: border-box;
-    padding:10% 5%;
 `

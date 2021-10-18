@@ -9,6 +9,7 @@ import LandingPage from './LandingPage';
 import ChatPage from './ChatPage';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
+import GithubPage from './GithubPage';
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <Route exact path="/chat" component={ChatPage} />
           <Route exact path="/signup" component={SignupPage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/github" component={GithubPage} />
         </Switch>
       </Router>
     </ThemeProvider>

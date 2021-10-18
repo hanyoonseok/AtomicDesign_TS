@@ -7,7 +7,7 @@ dotenv.config();
 const db = require('./models');
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-//const io = require('socket.io')(server);
+const io = require('socket.io')(server);
 const userRoutes = require('./routes/user');
 
 app.use(express.json());
