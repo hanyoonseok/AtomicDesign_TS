@@ -2,6 +2,9 @@ import React from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import * as S from './style';
 
+import { CircleImg } from '../../../components';
+import {defaultProfile} from '../../../assets/imgs'
+
 const Header = () => {
   // default
   return (
@@ -16,7 +19,9 @@ const Header = () => {
           <li>Explore</li>
         </S.StyledUl>
       </S.MenuWrapper>
-      <S.MenuWrapper></S.MenuWrapper>
+      <S.MenuWrapper>
+        <CircleImg width="50px" src='../../../assets/imgs'/>
+      </S.MenuWrapper>
     </S.Wrapper>
   );
 };

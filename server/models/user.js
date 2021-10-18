@@ -17,5 +17,10 @@ module.exports = (sequelize, DataTypes) =>{
         charset:'utf8',
         collate:'utf8_general_ci',
     });
+    User.associate = (db)=>{
+        db.User.hasMany(db.Post);
+        db.User.belongsToMany(db.User, {through:'Follow',as:'Followers', foreignKey:'followingId'}); //foreignkey는 먼저 찾는 것
+        db.User.belongsToMany(db.User, {through:'Follow',as:'Followings', foreignKey:'followerId'});
+    };
     return User;
 }

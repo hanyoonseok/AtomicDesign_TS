@@ -1,0 +1,1 @@
+export {default as defaultProfile} from './defaultProfile.png'

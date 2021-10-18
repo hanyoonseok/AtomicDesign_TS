@@ -1,14 +1,22 @@
-import React from 'react';
-import { AiFillGithub } from 'react-icons/ai';
+import React,{useEffect} from 'react';
+import { useHistory } from 'react-router';
 import * as S from './style';
+import { RootState } from '../../../modules';
+import { useSelector } from 'react-redux';
 
 const LeftSpace = () => {
-  // default
-  return (
-    <S.Wrapper>
-        left space
-    </S.Wrapper>
-  );
+  const { me } = useSelector((state: RootState) => state.user);
+  const history = useHistory();
+  useEffect(() => {
+    if (!me) {
+      history.push('/login');
+    }
+  }, [me]);
+  return <S.Wrapper>
+      {
+          me&& me.nickname
+      }
+  </S.Wrapper>;
 };
 
 export default LeftSpace;

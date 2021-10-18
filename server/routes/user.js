@@ -2,12 +2,25 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const passport = require('passport');
-const { User } = require('../models');
+const { User, Post } = require('../models');
 
 router.post('/login', async (req, res, next) => {
   const user = await User.findOne({
     where: { email: req.body.email },
     attributes: ['email', 'nickname', 'password'],
+    include: [
+      { model: Post, attributes: ['id'] },
+      {
+        model: User,
+        as: 'Followings',
+        attributes: ['id'],
+      },
+      {
+        model: User,
+        as: 'Followers',
+        attributes: ['id'],
+      },
+    ],
   });
   const result = user.password === req.body.password;
   if (result) {
