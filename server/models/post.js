@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) =>{
         title:{
             type:DataTypes.TEXT,
             allowNull:false,
+        },
+        userId:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
         }
     },{ 
         charset:'utf8mb4',

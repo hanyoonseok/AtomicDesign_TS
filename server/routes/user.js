@@ -9,7 +9,7 @@ router.post('/login', async (req, res, next) => {
     where: { email: req.body.email },
     attributes: ['email', 'nickname', 'password'],
     include: [
-      { model: Post, attributes: ['id'] },
+      { model: Post },
       {
         model: User,
         as: 'Followings',
