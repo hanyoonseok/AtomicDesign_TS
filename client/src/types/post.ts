@@ -3,4 +3,7 @@ export interface IPost{
     title?:string,
     userId?:number,
     content?:string,
+    UserId?:number,
+    createdAt?:Date,
+    updatedAt?:Date
 }

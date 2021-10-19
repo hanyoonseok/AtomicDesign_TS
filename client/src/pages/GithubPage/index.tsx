@@ -11,6 +11,9 @@ const GithubPage:React.FC = () => {
   const history = useHistory();
   const me = useSelector((state: RootState) => state.user?.me);
 
+  useEffect(()=>{ //처음 요청할 때부터 팔로우 배열만 보내자.
+
+  })
   useEffect(() => {
     if (!me) {
       history.push('/login');

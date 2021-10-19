@@ -9,6 +9,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const io = require('socket.io')(server);
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
 app.use(express.json());
 app.use(cors({
@@ -53,6 +54,7 @@ db.sequelize.sync()
   .catch(console.log('db접속 실패'));
 
 app.use('/user',userRoutes);
+app.use('/post',postRoutes);
 
 app.listen(5000, () =>{
   console.log('서버 실행중')

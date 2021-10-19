@@ -1,11 +1,9 @@
-import React from "react";
-import * as S from "./style";
+import React from 'react';
+import * as S from './style';
 
-function Paper ():React.ReactElement {
+function Paper({ ...props }): React.ReactElement {
   // default
-  return (
-    <S.Paper/>
-  );
-};
+  return (<S.Paper></S.Paper>)
+}
 
 export default Paper;

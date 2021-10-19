@@ -7,6 +7,7 @@ export { default as CircleImg } from './atoms/CircleImg';
 
 // Molecules
 export { default as TodoItem } from './molecules/TodoItem';
+export { default as ActivityCard } from './molecules/ActivityCard';
 
 // Organisms
 export { default as AddForm } from './organisms/AddForm';
