@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import useScore from '../../hooks/useScore';
 import usePlayer from '../../hooks/usePlayer';
-import useInput from '../../hooks/useInput';
-import { IPlayer } from '../../types/player';
+import classNames from 'classnames'
+import './style.scss'
 
 const LandingPage: React.FC = () => {
   const [nickname, setNickname] = useState('');
@@ -44,6 +44,9 @@ const LandingPage: React.FC = () => {
             </div>
           );
         })}
+      <button className={classNames('Button', 'large','blue')}>sass large btn</button>
+      <button className={classNames('Button', 'medium','red')}>sass medium btn</button>
+      <button className={classNames('Button', 'small', 'green')}>sass small btn</button>
     </>
   );
 };
