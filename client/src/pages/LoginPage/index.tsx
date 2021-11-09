@@ -4,10 +4,12 @@ import {Link} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import * as S from './style';
 import { AiFillGithub } from 'react-icons/ai';
+import axios from 'axios';
 
 import { RootState } from '../../modules';
 import { loginUser } from '../../modules/user';
 import useInput from '../../hooks/useInput';
+import { KAKAO_AUTH_URL } from '../../constants';
 
 const LoginPage = () => {
   const [email, onChangeEmail] = useInput('');
@@ -24,6 +26,9 @@ const LoginPage = () => {
     [email, password]
   );
 
+  const onSubmitKakaoLogin = useCallback(()=>{
+
+  },[])
   useEffect(() => {
     if (me) {
       history.push('/github');
@@ -41,6 +46,7 @@ const LoginPage = () => {
           <h3>password</h3>
           <S.StyledInput type="password" value={password} onChange={onChangePassword} />
           <S.StyledButton onClick={onSubmitLogin}>Sign in</S.StyledButton>
+          <S.StyledButton><a href={KAKAO_AUTH_URL}>KaKao Login</a></S.StyledButton>
         </S.StyledForm>
         <S.StyledForm>
           New to Github? <Link to="/signup" color="blue">create a new account</Link>

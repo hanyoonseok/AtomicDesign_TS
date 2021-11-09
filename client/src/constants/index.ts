@@ -51,3 +51,8 @@ export const SIGNUP_USER_ERROR = "SIGNUP_USER_ERROR";
 export const LOAD_POSTS = "LOAD_POSTS";
 export const LOAD_POSTS_SUCCESS = "LOAD_POSTS_SUCCESS";
 export const LOAD_POSTS_ERROR = "LOAD_POSTS_ERROR";
+
+//KAKAO
+export const CLIENT_ID="6bb5f847198cb52b97558e6401a1f91e"; //REST API 키
+export const REDIRECT_URI="http://localhost:3000"; //동의하고 계속하기 클릭 후의 리다이렉트 주소
+export const KAKAO_AUTH_URL=`https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
