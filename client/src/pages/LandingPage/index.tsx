@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import useScore from '../../hooks/useScore';
 import usePlayer from '../../hooks/usePlayer';
 import classNames from 'classnames'
-import './style.scss'
+//import './style.scss'
 
 const LandingPage: React.FC = () => {
   const [nickname, setNickname] = useState('');

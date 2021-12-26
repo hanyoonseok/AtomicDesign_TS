@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { all, fork } from 'redux-saga/effects';
 import axios from 'axios';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 import player from './player';
 import score from './score';
@@ -14,13 +16,17 @@ import todoSaga from './todo/saga';
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.withCredentials = true; //saga에서 보내는 axios는 전부 쿠키를 포함한다.
 
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 const rootReducer = combineReducers({
   player,
   score,
   todo,
   user,
 });
-export default rootReducer;
+//export default rootReducer;
 export type RootState = ReturnType<typeof rootReducer>;
 
 export function* rootSaga(): Generator {
@@ -31,3 +37,7 @@ export function* rootSaga(): Generator {
     fork(userSaga),
   ]);
 }
+
+const persistedReducer = persistReducer<any,any>(persistConfig, rootReducer);
+
+export default persistedReducer
